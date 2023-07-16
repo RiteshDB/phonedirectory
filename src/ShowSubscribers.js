@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import "./common/common.css";
-import "./App.css";
+import "./ShowSubscribers.css";
 
-class App extends Component {
+class ShowSubscribers extends Component {
 
   deleteHandler(id){
     alert(id);
@@ -52,4 +52,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ShowSubscribers;

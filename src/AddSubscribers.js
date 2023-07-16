@@ -13,11 +13,15 @@ class AddSubscribers extends Component {
             phone: ""
         }
     }
-    changeHandler = (event) => {
+    changeHandler = (event) =>{
         let temp = this.state;
         temp[event.target.name] = event.target.value;
         this.setState(temp);
-        console.log(this.state);
+    }
+    
+    addNewSubscriber = (event)=> {
+        event.preventDefault();
+        this.props.AddSubscribersHandler(this.state);        
     }
 
     render() {
@@ -32,9 +36,9 @@ class AddSubscribers extends Component {
                     <form className="subscriber-form">
                         <div>
                             <label className="label-control" htmlFor="name">Name:</label>
-                            <input type="text" className="input-control" id="name" name="name" onChange={this.changeHandler}></input><br></br><br></br>
+                            <input type="text" className="input-control" id="name" name="name" onChange={this.changeHandler.bind(this)}></input><br></br><br></br>
                             <label className="label-control" htmlFor="phone">Phone:</label>
-                            <input type="text" className="input-control" id="phone" name="phone" onChange={this.changeHandler}></input>
+                            <input type="text" className="input-control" id="phone" name="phone" onChange={this.changeHandler.bind(this)}></input>
                         </div>
                         <br></br>
                         <div className="subscriber-info-container">
@@ -47,7 +51,7 @@ class AddSubscribers extends Component {
                             </div>
                         </div>
                         <div>
-                            <button type="submit" className="custom-btn add-btn">Add</button>
+                            <button type="submit" className="custom-btn add-btn" onClick={this.addNewSubscriber.bind(this)}>Add</button>
                         </div>
                     </form>
                 </div>
