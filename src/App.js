@@ -1,14 +1,30 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import "./common/common.css";
 import "./App.css";
 
 class App extends Component {
 
+  deleteHandler(id){
+    alert(id);
+  } 
+
   render() {
-    const message = "Ritesh Bhandari"
+    let contactList = [
+      {
+        id: 1,
+        name: "Ritesh",
+        phoneNo: 98768372827
+      },
+      {
+        id: 2,
+        name: "Dattatraya",
+        phoneNo: 9736276282
+      }
+    ]
     return (
       <div>
-        <Header />
+        <Header heading="Phone Directory"/>
         <div className="component-body-container">
           <button className="custom-btn add-btn">Add</button>
 
@@ -16,9 +32,22 @@ class App extends Component {
             <span className="grid-item name-heading">Name</span>
             <span className="grid-item phone-heading">Phone</span>
           </div>
+          {
+            contactList.map(item => {
+              const { id, name, phoneNo } = item
+              return < div className="grid-container" key={id}>
+                <span className="grid-item">{name}</span>
+                <span className="grid-item">{phoneNo}</span>
+                <span className="grid-item action-btn-container">
+                  <button className="custom-btn delete-btn" onClick={this.deleteHandler.bind(this, id)}>Delete</button>
+                </span>
+              </div>
+            })
+          }
+
+
         </div>
-      </div>
-      // React.createElement('div', {id:"main-tag", className:"main-tag" },"this is a div tag")
+      </div >
     );
   }
 }
