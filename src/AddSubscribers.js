@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./Header";
 import "./common/common.css"
 import "./AddSubscribers.css";
+import {Link} from 'react-router-dom';
 
 class AddSubscribers extends Component {
 
@@ -30,7 +31,7 @@ class AddSubscribers extends Component {
                 <Header heading="Add Subscriber" />
                 <br></br>
                 <div>
-                    <button className="custom-btn">Back</button>
+                    <Link to="./"><button className="custom-btn">Back</button></Link>
                 </div>
                 <div>
                     <form className="subscriber-form">
