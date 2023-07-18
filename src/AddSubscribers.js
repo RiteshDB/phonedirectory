@@ -31,7 +31,7 @@ class AddSubscribers extends Component {
                 <Header heading="Add Subscriber" />
                 <br></br>
                 <div>
-                    <Link to="./"><button className="custom-btn">Back</button></Link>
+                    <Link to="/"><button className="custom-btn">Back</button></Link>
                 </div>
                 <div>
                     <form className="subscriber-form">

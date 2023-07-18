@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Header from "./Header";
 import "./common/common.css";
 import "./ShowSubscribers.css";
-import {link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class ShowSubscribers extends Component {
 
   deleteHandler(id){
-    alert(id);
+    console.log(id);
+    this.props.deleteSubscriberHandler(id);
   } 
 
   render() {
@@ -27,7 +28,7 @@ class ShowSubscribers extends Component {
       <div>
         <Header heading="Phone Directory"/>
         <div className="component-body-container">
-          <Link to='/Add'><button className="custom-btn add-btn">Add</button></Link>
+          <Link to="/Add"><button className="custom-btn add-btn">Add</button></Link>
 
           <div className="grid-container heading-container">
             <span className="grid-item name-heading">Name</span>
@@ -35,10 +36,10 @@ class ShowSubscribers extends Component {
           </div>
           {
             this.props.ShowSubscribers.map(item => {
-              const { id, name, phoneNo } = item
+              const { id, name, phone } = item
               return < div className="grid-container" key={id}>
                 <span className="grid-item">{name}</span>
-                <span className="grid-item">{phoneNo}</span>
+                <span className="grid-item">{phone}</span>
                 <span className="grid-item action-btn-container">
                   <button className="custom-btn delete-btn" onClick={this.deleteHandler.bind(this, id)}>Delete</button>
                 </span>
