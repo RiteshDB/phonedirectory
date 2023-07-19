@@ -1,30 +1,33 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import AddSubscribers from "./AddSubscribers";
 import ShowSubscribers from "./ShowSubscribers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-class PhoneDirectory extends Component {
-    constructor() {
-        super();
-        this.state = {
-            subscribersList: []
-        }
-    }
+function PhoneDirectory(){
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         subscribersList: []
+    //     }
+    // }
 
-    addSubscribersHandler = (newSubscriber) => {
-        let subscribersList = this.state.subscribersList;
-        if (subscribersList.length > 0) {
-            newSubscriber.id = ((subscribersList[subscribersList.length - 1].id) + 1);
+    const [subscribersList, setSubscribersList] = useState([]);
+
+    const addSubscribersHandler = (newSubscriber) => {
+        let tempSubscribersList = subscribersList;
+        if (tempSubscribersList.length > 0) {
+            newSubscriber.id = ((tempSubscribersList[tempSubscribersList.length - 1].id) + 1);
         }
         else {
             newSubscriber.id = 1;
         }
-        subscribersList.push(newSubscriber);
-        this.setState({ subscribersList: subscribersList });
+        tempSubscribersList.push(newSubscriber);
+        setSubscribersList(tempSubscribersList);
     }
 
-    deleteSubscriberHandler = (subscriberId) => {
-        let tempSubscriberList = this.state.subscribersList;
+    const deleteSubscriberHandler = (subscriberId) => {
+        console.log("entered delete subscriber.")
+        let tempSubscriberList = subscribersList;
         let itemIndex = 0;
         tempSubscriberList.forEach( (item, index) => {
             if (item.id === subscriberId) {
@@ -32,21 +35,21 @@ class PhoneDirectory extends Component {
             }
         });
         tempSubscriberList.splice(itemIndex, 1);
-        this.setState({ subscribersList: tempSubscriberList });
+        console.log(tempSubscriberList);
+        setSubscribersList(tempSubscriberList);
     }
 
-    render() {
         return (
             <Router>
                 <div>
                     <Routes>
-                        <Route exact path='/' Component={(props) => <ShowSubscribers {...props} ShowSubscribers={this.state.subscribersList} deleteSubscriberHandler={this.deleteSubscriberHandler} />} />
-                        <Route exact path='/Add' Component={(props) => <AddSubscribers {...props} AddSubscribersHandler={this.addSubscribersHandler} />} />
+                        <Route exact path='/' Component={(props) => <ShowSubscribers {...props} ShowSubscribers={subscribersList} deleteSubscriberHandler={deleteSubscriberHandler} />} />
+                        <Route exact path='/Add' Component={(props) => <AddSubscribers {...props} AddSubscribersHandler={addSubscribersHandler} />} />
                     </Routes>
                 </div>
             </Router>
         )
-    }
+    
 }
 
 export default PhoneDirectory;
