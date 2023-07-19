@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from "./Header";
 import "./common/common.css";
 import "./ShowSubscribers.css";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function ShowSubscribers(props){
 
-  const deleteHandler = (id)=>{
+  function deleteHandler(id){
     props.deleteSubscriberHandler(id);
   } 
 
@@ -27,7 +27,7 @@ function ShowSubscribers(props){
                 <span className="grid-item">{name}</span>
                 <span className="grid-item">{phone}</span>
                 <span className="grid-item action-btn-container">
-                  <button className="custom-btn delete-btn" onClick={deleteHandler({id})}>Delete</button>
+                  <button className="custom-btn delete-btn" onClick={()=>deleteHandler(id)}>Delete</button>
                 </span>
               </div>
             })

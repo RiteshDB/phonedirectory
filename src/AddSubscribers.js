@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import "./common/common.css"
 import "./AddSubscribers.css";
@@ -21,15 +21,18 @@ function AddSubscribers(props) {
         phone: ""
     })
 
-    const changeHandler = (event) => {
+    function changeHandler(event){
         let temp = state;
         temp[event.target.name] = event.target.value;
-        setState(temp);
+        setState({id: 0, name: temp.name, phone: temp.phone});
     }
 
-    const addNewSubscriber = (event) => {
+    function addNewSubscriber(event) {
         event.preventDefault();
         props.AddSubscribersHandler(state);
+        setState({id: 0,
+            name: "",
+            phone: ""}) ;
     }
 
 
@@ -41,7 +44,7 @@ function AddSubscribers(props) {
                 <Link to="/"><button className="custom-btn">Back</button></Link>
             </div>
             <div>
-                <form className="subscriber-form">
+                <form className="subscriber-form" onSubmit={addNewSubscriber}>
                     <div>
                         <label className="label-control" htmlFor="name">Name:</label>
                         <input type="text" className="input-control" id="name" name="name" onChange={changeHandler}></input><br></br><br></br>
@@ -59,7 +62,7 @@ function AddSubscribers(props) {
                         </div>
                     </div>
                     <div>
-                        <Link to="/"><button type="submit" className="custom-btn add-btn" onClick={addNewSubscriber.bind(this)}>Add</button></Link>
+                        <button type="submit" className="custom-btn add-btn">Add</button>
                     </div>
                 </form>
             </div>

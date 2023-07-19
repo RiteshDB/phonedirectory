@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import AddSubscribers from "./AddSubscribers";
 import ShowSubscribers from "./ShowSubscribers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -13,7 +13,7 @@ function PhoneDirectory(){
 
     const [subscribersList, setSubscribersList] = useState([]);
 
-    const addSubscribersHandler = (newSubscriber) => {
+    function addSubscribersHandler(newSubscriber){
         let tempSubscribersList = subscribersList;
         if (tempSubscribersList.length > 0) {
             newSubscriber.id = ((tempSubscribersList[tempSubscribersList.length - 1].id) + 1);
@@ -25,17 +25,8 @@ function PhoneDirectory(){
         setSubscribersList(tempSubscribersList);
     }
 
-    const deleteSubscriberHandler = (subscriberId) => {
-        console.log("entered delete subscriber.")
-        let tempSubscriberList = subscribersList;
-        let itemIndex = 0;
-        tempSubscriberList.forEach( (item, index) => {
-            if (item.id === subscriberId) {
-                itemIndex = index;
-            }
-        });
-        tempSubscriberList.splice(itemIndex, 1);
-        console.log(tempSubscriberList);
+    function deleteSubscriberHandler(subscriberId){
+        let tempSubscriberList = subscribersList.filter((subscriber) => subscriber.id !== subscriberId);
         setSubscribersList(tempSubscriberList);
     }
 
@@ -43,8 +34,8 @@ function PhoneDirectory(){
             <Router>
                 <div>
                     <Routes>
-                        <Route exact path='/' Component={(props) => <ShowSubscribers {...props} ShowSubscribers={subscribersList} deleteSubscriberHandler={deleteSubscriberHandler} />} />
-                        <Route exact path='/Add' Component={(props) => <AddSubscribers {...props} AddSubscribersHandler={addSubscribersHandler} />} />
+                        <Route exact path='/' Component={(props) => <ShowSubscribers {...props} ShowSubscribers={subscribersList} deleteSubscriberHandler={(subscriberId)=>deleteSubscriberHandler(subscriberId)} />} />
+                        <Route exact path='/Add' Component={(props) => <AddSubscribers  {...props} AddSubscribersHandler={(newSubscriber)=> addSubscribersHandler(newSubscriber)} />} />
                     </Routes>
                 </div>
             </Router>
