@@ -3,6 +3,8 @@ import Header from "./Header";
 import "./common/common.css"
 import "./AddSubscribers.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { Button } from "@mui/material";
+import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 
 function AddSubscribers(props) {
 
@@ -20,21 +22,23 @@ function AddSubscribers(props) {
         name: "",
         phone: ""
     })
-    
+
     const navigate = useNavigate()
 
-    function changeHandler(event){
+    function changeHandler(event) {
         let temp = state;
         temp[event.target.name] = event.target.value;
-        setState({id: 0, name: temp.name, phone: temp.phone});
+        setState({ id: 0, name: temp.name, phone: temp.phone });
     }
 
     function addNewSubscriber(event) {
         event.preventDefault();
         props.AddSubscribersHandler(state);
-        setState({id: 0,
+        setState({
+            id: 0,
             name: "",
-            phone: ""}) ;
+            phone: ""
+        });
         navigate("/");
     }
 
@@ -44,15 +48,25 @@ function AddSubscribers(props) {
             <Header heading="Add Subscriber" />
             <br></br>
             <div>
-                <Link to="/"><button className="custom-btn">Back</button></Link>
+                <Link to="/"><Button variant="outlined">Back</Button></Link>
             </div>
             <div>
-                <form className="subscriber-form" onSubmit={addNewSubscriber}>
+                <ValidatorForm className="subscriber-form" onSubmit={addNewSubscriber}>
                     <div>
-                        <label className="label-control" htmlFor="name">Name:</label>
-                        <input type="text" className="input-control" id="name" name="name" onChange={changeHandler}></input><br></br><br></br>
-                        <label className="label-control" htmlFor="phone">Phone:</label>
-                        <input type="text" className="input-control" id="phone" name="phone" onChange={changeHandler}></input>
+                        <TextValidator 
+                        id="Name" 
+                        label="Enter Name" 
+                        variant="standard"
+                        type="text"
+                        name="name"
+                        value = {Name.value} 
+                        onChange={changeHandler}
+                        validators={["required"]}
+                        errorMessages={["Name Cannot be Empty"]}
+                        
+                        ></TextValidator> <br /> <br />
+
+                        <TextValidator id="phone" label="Phone" variant="standard" name="phone" onChange={changeHandler} />
                     </div>
                     <br></br>
                     <div className="subscriber-info-container">
@@ -65,9 +79,11 @@ function AddSubscribers(props) {
                         </div>
                     </div>
                     <div>
-                        <button type="submit" className="custom-btn add-btn">Add</button>
+                        <Button variant="contained" color="success" type="Submit" size="large"> 
+                            Add
+                        </Button>
                     </div>
-                </form>
+                </ValidatorForm>
             </div>
         </div>
     )
