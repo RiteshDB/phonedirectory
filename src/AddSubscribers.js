@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import "./common/common.css"
 import "./AddSubscribers.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AddSubscribers(props) {
 
@@ -20,6 +20,8 @@ function AddSubscribers(props) {
         name: "",
         phone: ""
     })
+    
+    const navigate = useNavigate()
 
     function changeHandler(event){
         let temp = state;
@@ -33,6 +35,7 @@ function AddSubscribers(props) {
         setState({id: 0,
             name: "",
             phone: ""}) ;
+        navigate("/");
     }
 
 

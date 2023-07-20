@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Header from "./Header";
 import "./common/common.css";
 import "./ShowSubscribers.css";
 import { Link } from "react-router-dom";
 
 function ShowSubscribers(props){
+
+  
+  useEffect(() => {document.title= "No of contacts is "+ props.ShowSubscribers.length }, [props.ShowSubscribers]);
 
   function deleteHandler(id){
     props.deleteSubscriberHandler(id);

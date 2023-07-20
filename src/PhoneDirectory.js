@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import AddSubscribers from "./AddSubscribers";
 import ShowSubscribers from "./ShowSubscribers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 
 function PhoneDirectory(){
     // constructor() {
@@ -11,7 +13,10 @@ function PhoneDirectory(){
     //     }
     // }
 
+ 
+
     const [subscribersList, setSubscribersList] = useState([]);
+
 
     function addSubscribersHandler(newSubscriber){
         let tempSubscribersList = subscribersList;
@@ -34,8 +39,9 @@ function PhoneDirectory(){
             <Router>
                 <div>
                     <Routes>
+                        
                         <Route exact path='/' Component={(props) => <ShowSubscribers {...props} ShowSubscribers={subscribersList} deleteSubscriberHandler={(subscriberId)=>deleteSubscriberHandler(subscriberId)} />} />
-                        <Route exact path='/Add' Component={(props) => <AddSubscribers  {...props} AddSubscribersHandler={(newSubscriber)=> addSubscribersHandler(newSubscriber)} />} />
+                        <Route exact path='/Add' Component={(props) => <AddSubscribers {...props} AddSubscribersHandler={(newSubscriber)=> addSubscribersHandler(newSubscriber)} />} />
                     </Routes>
                 </div>
             </Router>
