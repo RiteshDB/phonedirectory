@@ -7,3 +7,12 @@
     height: 50px;
     padding: 10px;
 }
+
+.location-tag{
+    text-align: right;
+    background-color: black;
+    color: white;   
+    font-size: 20px;
+    height: 40px;
+    padding: 10px;
+}
