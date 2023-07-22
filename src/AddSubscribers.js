@@ -3,8 +3,8 @@ import Header from "./Header";
 import "./common/common.css"
 import "./AddSubscribers.css";
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from "@mui/material";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import { Button, TextField } from "@mui/material";
+import {  ValidatorForm } from "react-material-ui-form-validator";
 
 function AddSubscribers(props) {
 
@@ -53,20 +53,25 @@ function AddSubscribers(props) {
             <div>
                 <ValidatorForm className="subscriber-form" onSubmit={addNewSubscriber}>
                     <div>
-                        <TextValidator 
-                        id="Name" 
+                        <TextField
+                        id="name" 
                         label="Enter Name" 
                         variant="standard"
+                        required
                         type="text"
                         name="name"
-                        value = {Name.value} 
-                        onChange={changeHandler}
-                        validators={["required"]}
-                        errorMessages={["Name Cannot be Empty"]}
-                        
-                        ></TextValidator> <br /> <br />
+                        onChange={changeHandler}                     
+                        ></TextField> <br /> <br />
 
-                        <TextValidator id="phone" label="Phone" variant="standard" name="phone" onChange={changeHandler} />
+                        <TextField 
+                        id="phone" 
+                        label="Phone" 
+                        variant="standard" 
+                        required
+                        type="number"
+                        name="phone" 
+                        onChange={changeHandler}
+                       />
                     </div>
                     <br></br>
                     <div className="subscriber-info-container">
